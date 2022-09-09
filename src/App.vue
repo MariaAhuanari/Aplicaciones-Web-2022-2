@@ -1,47 +1,57 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+export default {
+  data() {
+    return {
+      value:"",
+      categories: [
+        { name: "Lácteos", code: "LA" },
+        { name: "Verduras", code: "VE" },
+        { name: "Frutas", code: "FR" },
+      ],
+    };
+  },
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-    <div>Hola mundoo soy maria</div>
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <form>
+    <div class="card">
+      <h1>
+        {{$tc("greeting", {name:"Pedro"})}}
 
-  <main>
-    <TheWelcome />
-  </main>
+      </h1>
+      <div class="field grid">
+        <label class="col-3 mb-2" for="code">{{$t("code")}}</label>
+        <div class="col-7 p-0">
+          <InputText id="code" />
+        </div>
+        <div class="col-2">
+          <Button label="validar" />
+        </div>
+      </div>
+      <div class="field grid">
+        <label for="nombre" class="col-3 mb-2" >Nombre*</label>
+        <div class="9"> <InputText id="nombre" class="w-full" /></div>
+      </div>
+      <div class="field grid">
+        <label for="Telefono" class="col-3 mb-2">Telefono*</label>
+        <div class=9> <InputMask id="Telefono" v-model="value" mask="a9-99999a" class="w-full" /></div>
+      </div>
+      <div class="field grid">
+        <label for="category" class="col-3 mb-2">Cetegoría*</label>
+        <div class="col-9 p-0"> <pv-dropdown
+            id="category"
+            :options="categories"
+            optionLabel="code"
+            placeholder="Select a category"
+            class="w-full"
+        ></pv-dropdown></div>
+      </div>
+      <h2>
+        {{$tc("product", 2)}}
+      </h2>
+    </div>
+  </form>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style scoped></style>
